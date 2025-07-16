@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório Técnico de Obra</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    .assinatura {
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Relatório Técnico de Obra</h1>
+
+  <p>
+    <strong>Engenheiro Responsável:</strong> {{nome_do_engenheiro}} – CREA {{numero_do_CREA}} <br>
+    <strong>Cliente:</strong> {{nome_do_cliente}} <br>
+    <strong>Obra:</strong> {{nome_da_obra}}<br>
+    <strong>Endereço:</strong> {{endereco}}<br>
+    <strong>Período:</strong> {{data_inicial_do_periodo}} a {{data_final_do_periodo}}<br>
+    <strong>Data do Relatório:</strong> {{data_do_relatorio}}
+  </p>
+
+  <h2>1. Objetivo</h2>
+  <p>
+    Este relatório tem como objetivo apresentar o resumo técnico das atividades executadas na obra durante o período especificado, bem como relatar eventuais ocorrências, condições climáticas e progresso das etapas.
+  </p>
+
+  <h2>2. Resumo das Atividades Executadas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Atividades Realizadas</th>
+        <th>Equipe/Observações</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in atividades %}
+      <tr>
+        <td>{{i.data_da_atividade}}</td>
+        <td>{{i.atividade_realizada}}</td>
+        <td>{{i.numero_de_pessoas_da_atividade}} {{i.funcao_das_pessoas_na_atividade}}, o clima predominante na atividade era {{i.condicao_climatica_da_atividade}}</td>
+      </tr>
+    {% endfor %}
+      <!-- Adicione mais linhas conforme necessário -->
+    </tbody>
+  </table>
+
+  <h2>3. Condições Climáticas</h2>
+  <p>
+    Durante o período, as condições climáticas foram {{condicoes_climaticas}}, o que {{influenciou_nas_atividades}} a execução das etapas previstas.
+  </p>
+
+  <h2>4. Ocorrências Relevantes</h2>
+  <ul>
+    {% for i in ocorrencias %}
+    <li>{{i.ocorrencia_relevante}} {{i.solucao}}</li>
+    {% endfor %}
+  </ul>
+
+</body>
+</html>

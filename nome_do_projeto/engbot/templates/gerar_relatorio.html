@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Relatório Técnico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      max-width: 900px;
+      margin: auto;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+      color: #333;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 16px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      background-color: #fafafa;
+    }
+
+    fieldset {
+      margin-top: 25px;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    legend {
+      font-weight: bold;
+      padding: 0 10px;
+      color: #444;
+    }
+
+    .grupo {
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="number"] {
+      max-width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Relatório Técnico de Obra</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="grupo">
+      <label>Nome do Engenheiro</label>
+      <input type="text" name="nome_do_engenheiro">
+
+      <label>Número do CREA</label>
+      <input type="text" name="numero_do_CREA">
+
+      <label>Nome do Cliente</label>
+      <input type="text" name="nome_do_cliente">
+
+      <label>Nome da Obra</label>
+      <input type="text" name="nome_da_obra">
+
+      <label>Endereço</label>
+      <input type="text" name="endereço">
+
+      <label>Data Inicial do Período</label>
+      <input type="date" name="data_inicial_do_periodo">
+
+      <label>Data Final do Período</label>
+      <input type="date" name="data_final_do_periodo">
+
+      <label>Data do Relatório</label>
+      <input type="date" name="data_do_relatorio">
+
+      <label>Condições Climáticas</label>
+      <input type="text" name="condicoes_climaticas">
+
+      <label>Influenciou nas Atividades?</label>
+      <input type="text" name="influenciou_nas_atividades">
+    </div>
+
+    <fieldset>
+      <legend>Atividades</legend>
+      <div id="atividades"></div>
+      <button type="button" onclick="adicionarAtividade()">+ Adicionar Atividade</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Ocorrências</legend>
+      <div id="ocorrencias"></div>
+      <button type="button" onclick="adicionarOcorrencia()">+ Adicionar Ocorrência</button>
+    </fieldset>
+
+    <br>
+    <div class="btn-group">
+      <button type="submit">Enviar Relatório</button>
+    </div>
+
+  </form>
+
+  <script>
+    let contadorAtividades = 0;
+    let contadorOcorrencias = 0;
+
+    function adicionarAtividade() {
+      const container = document.getElementById('atividades');
+      const index = contadorAtividades++;
+
+      const grupo = document.createElement('div');
+      grupo.innerHTML = `
+        <fieldset>
+          <legend>Atividade ${index + 1}</legend>
+
+          <label>Data da Atividade</label>
+          <input type="date" name="data_da_atividade">
+
+          <label>Número de Pessoas</label>
+          <input type="number" name="atividade_realizada[${index}][numero_de_pessoas_da_atividade]">
+
+          <label>Função das Pessoas</label>
+          <input type="text" name="atividade_realizada[${index}][funcao_das_pessoas_na_atividade]">
+
+          <label>Condição Climática</label>
+          <input type="text" name="atividade_realizada[${index}][condicao_climatica_da_atividade]">
+        </fieldset>
+      `;
+      container.appendChild(grupo);
+    }
+
+    function adicionarOcorrencia() {
+      const container = document.getElementById('ocorrencias');
+      const index = contadorOcorrencias++;
+
+      const grupo = document.createElement('div');
+      grupo.innerHTML = `
+        <fieldset>
+          <legend>Ocorrência ${index + 1}</legend>
+
+          <label>Ocorrência Relevante</label>
+          <input type="text" name="ocorrencias[${index}][ocorrencia_relevante]">
+
+          <label>Solução</label>
+          <input type="text" name="ocorrencias[${index}][solucao]">
+        </fieldset>
+      `;
+      container.appendChild(grupo);
+    }
+  </script>
+
+</body>
+</html>
