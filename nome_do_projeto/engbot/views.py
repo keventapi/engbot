@@ -18,3 +18,6 @@ def gerar_relatorio(request):
     if request.method == "POST":
         return AI().gerar_relatorio(request.POST)        
     return render(request, 'gerar_relatorio.html')
+
+def index(request):
+    return render(request, "lanpage.html")

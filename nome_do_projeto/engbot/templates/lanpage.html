@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngenhoBoot - A IA para Engenheiros Civis</title>
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000B1D;
+            font-family: Arial, sans-serif;
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #FFD500;
+        }
+
+        h2 + p { /* Parágrafo que vem logo após um h2 */
+            margin-top: 0;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            background-color: #002147;
+            padding: 10px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #003366;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1.1;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            border-right: 1px solid #003366;
+            padding-right: 20px;
+        }
+
+        .social-icons a img {
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .social-icons a:hover img {
+            opacity: 1;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            background-color: #000B1D;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            background-color: #FFD500;
+            color: #000B1D;
+        }
+
+        /* --- SEÇÃO HERO (INICIAL) --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0, 11, 29, 0.8), #000B1D), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+        }
+
+        .hero img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ddd;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero button {
+            background-color: #FFD500;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000B1D;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero button:hover {
+            background-color: #e6c200;
+        }
+        
+        /* --- SEÇÃO DE FUNCIONALIDADES --- */
+        #features {
+            background-color: #00122e;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: #002147;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #003366;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .feature-card img {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .feature-card p {
+            font-size: 16px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* --- SEÇÃO DE DEPOIMENTOS --- */
+        #testimonials {
+            background-color: #000B1D;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testimonial-card {
+            background-color: #002147;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #FFD500;
+        }
+        .testimonial-card p.quote {
+            font-style: italic;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        .testimonial-card p.author {
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+        .testimonial-card p.role {
+            font-size: 14px;
+            color: #FFD500;
+            margin: 0;
+        }
+        
+        /* --- SEÇÃO DE PREÇOS --- */
+        #pricing {
+            background-color: #00122e;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        .pricing-plan {
+            background-color: #002147;
+            padding: 40px 20px;
+            border-radius: 10px;
+            border: 1px solid #003366;
+            transition: all 0.3s;
+        }
+        .pricing-plan.popular {
+            transform: scale(1.05);
+            border-color: #FFD500;
+        }
+        .pricing-plan h3 {
+            font-size: 24px;
+            color: #FFD500;
+        }
+        .pricing-plan .price {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .pricing-plan .price span {
+            font-size: 18px;
+            font-weight: normal;
+            color: #ccc;
+        }
+        .pricing-plan ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            color: #ccc;
+        }
+        .pricing-plan ul li {
+            margin-bottom: 10px;
+        }
+        .pricing-plan button {
+            background-color: #000B1D;
+            border: 2px solid #FFD500;
+            color: #FFD500;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .pricing-plan button:hover {
+            background-color: #FFD500;
+            color: #000B1D;
+        }
+        .pricing-plan.popular button {
+            background-color: #FFD500;
+            color: #000B1D;
+        }
+        
+        /* --- SEÇÃO FAQ --- */
+        .faq-item {
+            background-color: #002147;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .faq-question {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: #FFD500;
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            color: #ccc;
+            line-height: 1.6;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 20px;
+        }
+
+        /* --- MODAL DE CADASTRO --- */
+        .modal {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 11, 29, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #002147;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #FFD500;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            animation: slide-down 0.5s ease-out;
+        }
+        @keyframes slide-down {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close-button {
+            color: #ccc;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-button:hover {
+            color: #FFD500;
+        }
+        .modal-content h3 {
+            text-align: center;
+            color: #FFD500;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ccc;
+            text-align: left;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #000B1D;
+            border: 1px solid #003366;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box; /* Garante que padding não afete a largura total */
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #FFD500;
+        }
+        .form-group.terms {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        .form-group.terms input {
+            margin-right: 10px;
+        }
+        .form-group.terms a {
+            color: #FFD500;
+            text-decoration: none;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FFD500;
+            border: none;
+            border-radius: 5px;
+            color: #000B1D;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #e6c200;
+        }
+        
+        /* --- RODAPÉ --- */
+        footer {
+            background-color: #002147;
+            color: #ccc;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .footer-logo img {
+            width: 50px;
+        }
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #FFD500;
+        }
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .footer-social img {
+            width: 24px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .footer-social a:hover img {
+            opacity: 1;
+        }
+        .footer-copy {
+            margin-top: 20px;
+            font-size: 14px;
+            border-top: 1px solid #003366;
+            padding-top: 20px;
+            width: 100%;
+        }
+        
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            .social-icons {
+                padding-right: 0;
+                border-right: none;
+                justify-content: center;
+            }
+            .nav-links {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .container {
+                padding: 40px 15px;
+            }
+            h2 {
+                font-size: 28px;
+            }
+            .pricing-plan.popular {
+                transform: scale(1); /* Remove o destaque em telas pequenas */
+            }
+            .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="https://api.iconify.design/mdi/cog-transfer.svg?color=%23ffd500" alt="Logo EngenhoBoot">
+            <span>Engenho<br>βoot</span>
+        </div>
+
+        <nav>
+            <div class="social-icons">
+                <a href="#" target="_blank"><img src="https://api.iconify.design/mdi/instagram.svg?color=white" alt="Instagram"></a>
+                <a href="#" target="_blank"><img src="https://api.iconify.design/mdi/linkedin.svg?color=white" alt="LinkedIn"></a>
+                <a href="#" target="_blank"><img src="https://api.iconify.design/mdi/facebook.svg?color=white" alt="Facebook"></a>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Funcionalidades</a>
+                <a href="#pricing">Planos</a>
+                <!-- O ID 'openRegisterModalBtn' será usado pelo JavaScript para abrir o modal -->
+                <a id="openRegisterModalBtn">Cadastre-se</a> 
+                <a href="#">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ... (o restante do conteúdo main permanece o mesmo) ... -->
+        <section class="hero">
+            <img src="https://api.iconify.design/mdi/brain.svg?color=%23ffd500" alt="Ícone de Inteligência Artificial">
+            <h1>Inteligência Artificial<br>para Engenheiros Civis</h1>
+            <p>Nossa IA é treinada exclusivamente no acervo técnico e jurídico brasileiro.<br>Poupe tempo na elaboração de laudos e projetos, e aumente seus honorários.</p>
+            <a href="./chat/123456789"><button>TESTE GRÁTIS POR 7 DIAS →</button></a>
+        </section>
+
+        <section id="features" class="container">
+            <h2>O que o EngenhoBoot faz por você?</h2>
+            <p>Automatize as tarefas repetitivas e foque no que realmente importa: a engenharia.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://api.iconify.design/mdi/file-document-edit-outline.svg?color=%23ffd500" alt="Ícone de Laudo Técnico">
+                    <h3>Laudos Técnicos Automatizados</h3>
+                    <p>Gere laudos periciais, de vistoria e pareceres técnicos em minutos. Nossa IA estrutura o documento, analisa os dados e sugere textos com base nas normas vigentes.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://api.iconify.design/mdi/format-list-numbered.svg?color=%23ffd500" alt="Ícone de Normas ABNT">
+                    <h3>Consulta Inteligente de Normas</h3>
+                    <p>Precisa saber qual ABNT se aplica ao seu caso? Descreva o problema e nossa IA busca, interpreta e resume as normas técnicas relevantes para o seu projeto.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://api.iconify.design/mdi/calculator-variant-outline.svg?color=%23ffd500" alt="Ícone de Orçamento">
+                    <h3>Orçamentos e Memoriais Descritivos</h3>
+                    <p>Crie orçamentos detalhados e memoriais descritivos com base nas especificações do seu projeto. A IA ajuda a listar materiais, mão de obra e a seguir tabelas de referência.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="container">
+            <h2>Aprovado por quem entende do assunto</h2>
+            <p>Veja o que os engenheiros estão dizendo sobre o EngenhoBoot.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="quote">"O EngenhoBoot transformou minha rotina. O tempo que eu gastava em burocracia e pesquisa de normas agora é usado para prospectar novos clientes. Indispensável!"</p>
+                    <p class="author">Eng.ª Maria Clara Neves</p>
+                    <p class="role">Especialista em Patologia das Construções</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Estava cético no início, mas a precisão na geração dos laudos é impressionante. A IA realmente entende o contexto da engenharia civil brasileira. Me poupou dezenas de horas."</p>
+                    <p class="author">Eng. Ricardo Almeida</p>
+                    <p class="role">Perito Judicial</p>
+                </div>
+                 <div class="testimonial-card">
+                    <p class="quote">"A funcionalidade de consulta de normas é genial. Em vez de passar horas lendo documentos densos, eu recebo um resumo prático em segundos. Vale cada centavo."</p>
+                    <p class="author">Eng. Lucas Ferreira</p>
+                    <p class="role">Gestor de Obras</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="container">
+            <h2>Planos flexíveis para cada necessidade</h2>
+            <p>Comece de graça e evolua conforme sua demanda.</p>
+            <div class="pricing-grid">
+                <div class="pricing-plan">
+                    <h3>Autônomo</h3>
+                    <div class="price">R$ 49<span>/mês</span></div>
+                    <ul>
+                        <li>1 Usuário</li>
+                        <li>20 Documentos/mês</li>
+                        <li>Consulta de Normas</li>
+                        <li>Suporte por E-mail</li>
+                    </ul>
+                    <button>Começar Agora</button>
+                </div>
+                <div class="pricing-plan popular">
+                    <h3>Profissional</h3>
+                    <div class="price">R$ 99<span>/mês</span></div>
+                    <ul>
+                        <li>Até 3 Usuários</li>
+                        <li>Documentos Ilimitados</li>
+                        <li>Funções Avançadas de IA</li>
+                        <li>Suporte Prioritário via Chat</li>
+                    </ul>
+                    <button>Teste Grátis por 7 Dias</button>
+                </div>
+                <div class="pricing-plan">
+                    <h3>Empresas</h3>
+                    <div class="price">Contato</div>
+                    <ul>
+                        <li>Usuários Ilimitados</li>
+                        <li>Integração via API</li>
+                        <li>Treinamento de IA Personalizado</li>
+                        <li>Gerente de Contas Dedicado</li>
+                    </ul>
+                    <button>Solicitar Orçamento</button>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq" class="container">
+            <h2>Perguntas Frequentes</h2>
+            <p>Ainda tem dúvidas? A gente responde.</p>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Os dados dos meus projetos estão seguros?</div>
+                    <div class="faq-answer">
+                        <p>Sim. A segurança é nossa prioridade máxima. Todos os dados são criptografados em trânsito e em repouso. Não utilizamos as informações dos seus projetos para treinar modelos de outros usuários.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">A IA pode substituir o julgamento de um engenheiro?</div>
+                    <div class="faq-answer">
+                        <p>Não. O EngenhoBoot é uma ferramenta de auxílio e produtividade. Ele automatiza tarefas, fornece insights e acelera a criação de documentos, mas a revisão e a responsabilidade técnica final serão sempre do profissional de engenharia.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Posso cancelar minha assinatura a qualquer momento?</div>
+                    <div class="faq-answer">
+                        <p>Com certeza. Você pode cancelar seu plano a qualquer momento, sem burocracia. Você continuará com acesso até o final do período já pago.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://api.iconify.design/mdi/cog-transfer.svg?color=%23ffd500" alt="Logo EngenhoBoot">
+            </div>
+            <div class="footer-links">
+                <a href="#features">Funcionalidades</a>
+                <a href="#testimonials">Depoimentos</a>
+                <a href="#pricing">Planos</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" target="_blank"><img src="https://api.iconify.design/mdi/instagram.svg?color=white" alt="Instagram"></a>
+                <a href="#" target="_blank"><img src="https://api.iconify.design/mdi/linkedin.svg?color=white" alt="LinkedIn"></a>
+                <a href="#" target="_blank"><img src="https://api.iconify.design/mdi/facebook.svg?color=white" alt="Facebook"></a>
+            </div>
+            <div class="footer-copy">
+                © 2024 EngenhoBoot. Todos os direitos reservados. Uma ferramenta para otimizar a engenharia.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CADASTRO -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h3>Crie sua Conta no EngenhoBoot</h3>
+            <form action="#" method="POST" class="modal-form">
+                <div class="form-group">
+                    <label for="fullName">Nome Completo</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Digite seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail Profissional</label>
+                    <input type="email" id="email" name="email" placeholder="seu.email@provedor.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="crea">Nº do CREA / CAU (Opcional)</label>
+                    <input type="text" id="crea" name="crea" placeholder="Ex: MG123456789">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Mínimo de 8 caracteres" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Senha</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repita a senha" required>
+                </div>
+                <div class="form-group terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">Eu li e aceito os <a href="#">Termos de Serviço</a>.</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Criar Conta Gratuita</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+<script>
+    // Script para o Acordeão do FAQ
+    document.addEventListener('DOMContentLoaded', function () {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // --- LÓGICA DO MODAL DE CADASTRO ---
+        const modal = document.getElementById("registerModal");
+        const openBtn = document.getElementById("openRegisterModalBtn");
+        const closeBtn = document.querySelector(".close-button");
+
+        // Abre o modal
+        openBtn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Fecha o modal ao clicar no 'X'
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Fecha o modal ao clicar fora da área do conteúdo
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

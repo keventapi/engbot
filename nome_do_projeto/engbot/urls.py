@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 urlpatterns = [
+    path('', views.index),
     path('chat/<int:chat_id>', views.chat),
     path('gerar_relatorio', views.gerar_relatorio)
 ]
